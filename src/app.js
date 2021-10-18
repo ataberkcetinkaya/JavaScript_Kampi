@@ -1,4 +1,4 @@
-console.log("berklinux s.a")
+console.log("berklinux")
 
 let dolarBugun = 9.30
 
@@ -16,8 +16,20 @@ const euroDun = 11.2 //const'a bir değer atandığında sabit kalır, artık de
 console.log(euroDun)
 
 //array - birden fazla veri ayni yerde
-let konutKredileri =  ["Konut Kredisi", "Taşıt Kredisi", "Berk Kredisi", 12]
+let konutKredileri =  ["Konut Kredisi", "Taşıt Kredisi", "Berk Kredisi", 12, "Özel Kredi"]
 
-for 
+console.log("<ul>")
+for(let i = 0; i < konutKredileri.length; i++) {
+    console.log("<li>" + konutKredileri[i] + "</li>")
+}
+console.log("</ul>")
+
+{/* <ul>
+    <li>Konut Kredisi</li>
+    <li>Taşıt Kredisi</li>
+    <li>Berk Kredisi</li>
+    </ul>
+*/
+}
 
 console.log(konutKredileri)
