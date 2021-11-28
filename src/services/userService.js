@@ -32,7 +32,7 @@ export default class UserService {
                             this.employees.push(user)
                         }
                         break;
-                    default:
+                    default: //default kısmı yukaridaki case'lerden hariç bir şey ise
                         this.errors.push(new DataError("Wrong user type", user))
                 }
             }
@@ -53,9 +53,9 @@ export default class UserService {
                 }
             }
 
-            if(Number.isNaN(Number.parseInt(user.age))) { //kullanıcının yaşını sayıya çevirmek istedigimde bu bir sayi değilse, o zaman hata ver.
+            if(Number.isNaN(Number.parseInt(+user.age))) { //kullanıcının yaşını sayıya çevirmek istedigimde bu bir sayi değilse, o zaman hata ver.
                 hasErrors = true
-                this.errors.push(new DataError(`Validation problem. ${user.age} is not a number`, user))
+                this.errors.push(new DataError(`Validation problem. ${user.age} is not an age`, user))
             }
 
             return hasErrors //en nihayetinde for bitiminde hata var mi yok mu bakilacak
@@ -74,19 +74,51 @@ export default class UserService {
                                                                                         //string'leri ++ ile toplamak bellekte ayri ayri stringleri tutar fakat `${field}` tek basina kendisi
                 }
             }
+
+            if(Number.isNaN(Number.parseInt(user.age))) { //kullanıcının yaşını sayıya çevirmek istedigimde bu bir sayi değilse, o zaman hata ver.
+                hasErrors = true
+                this.errors.push(new DataError(`Validation problem. ${user.age} is not an age`, user))
+            }
+
             return hasErrors //en nihayetinde for bitiminde hata var mi yok mu bakilacak
         }
 
     add(user) {
-        //this.users.push(user)
+        switch (user.type) {
+            case "customer":
+                if(!this.checkCustomerValidityForErrors(user)) {
+                    this.customers.push(user)
+                }
+                break;
+            case "employee":
+                if(!this.checkEmployeeValidityForErrors(user)) {
+                    this.employees.push(user)
+                }
+                break;
+            default: //default kısmı yukaridaki case'lerden hariç bir şey ise
+                this.errors.push(new DataError("This user cannot be added. Wrong user type", user))
+                break;
+        }
         this.loggerService.log(user)
     }
 
-    list() {
-        //return this.users
+    listCustomers() {
+        return this.customers
     }
 
-    getById(id) {
-       //return this.users.find( u => u.id === id) 
+    getCustomerById(id) {
+       return this.customers.find( u => u.id === id) 
     }
+
+    getCustomersSorted() {
+        return this.customers.sort((customer1, customer2) => {     //elimizdeki primitive type'lari siralatir  
+            if (customer1.firstName > customer2.firstName) { //fakat elimizde obje var. 2 adet bölüm verip karşılaştırmasini saglariz.
+                return 1;
+            } else if(customer1.firstName === customer2.firstName) {
+                return 0;
+            } else {
+                return -1
+            }
+        })                                                                    
     }
+}

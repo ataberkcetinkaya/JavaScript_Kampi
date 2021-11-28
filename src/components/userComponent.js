@@ -1,4 +1,5 @@
 import { BaseLogger } from "../crossCuttingConcerns/logging/logger.js"
+import Customer from "../models/customer.js"
 import User from "../models/user.js"
 import UserService from "../services/userService.js"
 //userService.js içerisinde export ederken "default" olmasaydi,
@@ -18,10 +19,10 @@ userService.add(user1)
 userService.add(user2)
 //userları ekledigimiz yer olarak düsünülebilir.
 
-console.log(userService.list()) //user'ları veren metot
-//userları listeledimiz sayfa olarak düşünülebilir
-console.log(userService.getById(1))
-//userların detayini aldıgımız sayfa olarak düsünülebilir.
+//console.log(userService.list()) //user'ları veren metot
+// userları listeledimiz sayfa olarak düşünülebilir
+//console.log(userService.getById(1))
+// userların detayini aldıgımız sayfa olarak düsünülebilir.
 
 
 //prototyping - sonradan değer eklendi
@@ -32,7 +33,14 @@ console.log(customer.lastName)
 
 console.log("----------------------------------")
 userService.load()
+
+let customerToAdd = (new Customer(1, "Ataberk", "Çetinkaya", "Bursa", "asdds" )) //wrong user type olabilir çünkü usertype yanlış olabilir,
+customerToAdd.type = "customer"                                                 //olmasa bile, validation'dan da geçmesi gerekecek
+
+userService.add(customerToAdd)                                                     
+                                                                        
 console.log(userService.customers)
 console.log(userService.employees)
 console.log(userService.errors) //error olanlar buraya
+console.log(userService.getCustomersSorted())
 
