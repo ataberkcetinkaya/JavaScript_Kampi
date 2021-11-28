@@ -4,7 +4,7 @@ export const users = [
         firstName: "Ataberk",
         lastName: "Çetinkaya",
         city: "Bursa",
-        age: 23,
+        age: "a23",
         creditCardNumber: "123456",
         type: "customer"
     },
@@ -12,7 +12,7 @@ export const users = [
         id: 2,
         firstName: "Yeliz",
         lastName: "Yılmaz",
-        city: "Bursa",
+
         age: 21,
         creditCardNumber: "123456",
         type: "customer"
@@ -33,7 +33,16 @@ export const users = [
         lastName: "Demiroğ",
         city: "Ankara",
         age: 36,
-        salary: 9500,
+
         type: "employee"
+    },
+    {
+        id: 5,
+        firstName: "Ece",
+        lastName: "Can",
+        city: "Manisa",
+        age: 24,
+        salary: 5500,
+        type: "dfdgfhj" //nilerek yanlis yaziyoruz. dataError için.
     }
 ]
